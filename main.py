@@ -2,6 +2,7 @@ import requests
 import hashlib
 import sys
 
+
 def req_appi_data(query_char):
     url = 'https://api.pwnedpasswords.com/range/' + query_char
     res = requests.get(url)
@@ -26,13 +27,14 @@ def pwned_api_check(password):
 
 
 def main(args):
-
     for a in args:
         count = pwned_api_check(a)
         if count:
             print(f'"{a}" was found {count} times, you should probably change your password')
         else:
-            print(f'Password "{a}" was NOT found you are safe')
+            print(f'"{a}" was NOT found you are safe')
+    return 'done!'
 
 
-main(sys.argv[1:])
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
