@@ -1,16 +1,15 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import requests
+import hashlib
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def req_appi_data(query_char):
+    url = 'https://api.pwnedpasswords.com/range/' + 'password123'
+    res = requests.get(url)
+    if res.status_code != 200:
+        raise RuntimeError(f'Error fetching {res.status_code}')
+    return res
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def pwned_api_check(password):
+    sha1password = hashlib.sha1(password.encode('utf-8').hexdigest().upper())
+    return sha1password
